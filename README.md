@@ -1,3 +1,12 @@
+# Reproducible Research: Peer Assessment 1
+### Github source code: https://github.com/iyermobile/RepData_PeerAssessment1  
+
+##About Assignment:
+Refer 'Introduction' section below
+
+## About Code File:
+Run the Run_Rmd.R file to generate the .md and .html files.
+
 ## Introduction
 
 It is now possible to collect a large amount of data about personal

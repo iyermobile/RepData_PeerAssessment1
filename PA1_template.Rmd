@@ -1,5 +1,5 @@
 # Reproducible Research: Peer Assessment 1
-### Code by Shreeram A. Iyer | Github source code: https://github.com/iyermobile/RepData_PeerAssessment1  
+### Github source code: https://github.com/iyermobile/RepData_PeerAssessment1  
 
 Setup `knitr` options.
 ```{r setoptions}
