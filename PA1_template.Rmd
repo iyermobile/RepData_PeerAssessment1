@@ -3,7 +3,7 @@
 
 Setup `knitr` options.
 ```{r setoptions}
-opts_chunk$set(message = FALSE, fig.width = 6, fig.height = 6)
+opts_chunk$set(message = FALSE, fig.height = 7, fig.width = 7)
 ```
 
 Load needed libraries.
@@ -28,10 +28,10 @@ stepsPerDay <- ddply(activity, ~date, summarise, steps = sum(steps))
 ```
 
 Plot a histogram of the total number of steps taken per day.
-```{r}
+```{r histogram-total-steps}
 p <- ggplot(stepsPerDay, aes(steps))
-p <- p + geom_histogram(fill = "white", color = "black")
-p <- p + ggtitle("Total number of steps per day")
+p <- p + geom_histogram(fill = "white", color = "red")
+p <- p + ggtitle("Total number of Steps per day")
 p + xlab("Steps per day")
 ```
 
@@ -41,8 +41,8 @@ meanStepsPerDay <- mean(stepsPerDay$steps, na.rm = TRUE)
 medianStepsPerDay <- median(stepsPerDay$steps, na.rm = TRUE)
 ```
 
-- The mean of total number of steps per day is `r format(meanStepsPerDay, sciencific = T)`
-- The median of total number of steps per day is `r format(medianStepsPerDay, sciencific = T)`
+- The mean of total number of steps per day is `r format(meanStepsPerDay)`
+- The median of total number of steps per day is `r format(medianStepsPerDay)`
 
 ## What is the average daily activity pattern?
 
@@ -55,10 +55,10 @@ avgStepsPerInterval <- ddply(activity,
 ```
 
 Make a time series plot of the 5-minute interval and the average number of steps taken  and averaged across all days.
-```{r}
+```{r plot-average-steps}
 p <- ggplot(avgStepsPerInterval, aes(interval, mean)) + geom_line()
 p <- p + ggtitle("The average daily activity pattern")
-p + xlab("Interval") + ylab("Number of steps")
+p + xlab("Interval") + ylab("Number of Steps")
 ```
 
 Find the 5-minute interval that contains the maximum number of steps on average across all the days in the dataset.
@@ -100,10 +100,10 @@ imputedStepsPerDay <- ddply(imputedActivity, ~date, summarise, steps = sum(steps
 ```
 
 Make a histogram of the total number of steps taken each day.
-```{r}
+```{r histogram-imputed-total-steps}
 p <- ggplot(imputedStepsPerDay, aes(steps))
-p <- p + geom_histogram(fill = "white", color = "black")
-p <- p + ggtitle("Total number of steps per day")
+p <- p + geom_histogram(fill = "white", color = "red")
+p <- p + ggtitle("Total number of Steps per day")
 p + xlab("Steps per day")
 ```
 
@@ -114,15 +114,15 @@ imputedMedianStepsPerDay <- median(imputedStepsPerDay$steps)
 ```
 
 - The mean of total number steps per day is 
-`r format(imputedMeanStepsPerDay, sciencific = T)`
+`r format(imputedMeanStepsPerDay)`
 - The median of total number steps per day is 
-`r format(imputedMedianStepsPerDay, sciencific = T)`
+`r format(imputedMedianStepsPerDay)`
 
-The imputation slightly impacted on the median total number of steps taken per day. It was changed from `r format(medianStepsPerDay, sciencific = T)` to `r format(imputedMedianStepsPerDay, sciencific = T)`. The mean total number of steps taken per day remained the same. Usually the imputing of missing values can introduce bias in an estimates but in our case impact of it on the estimates of the total daily number of steps is negligible.
+The imputation slightly impacted on the median total number of steps taken per day. It was changed from `r format(medianStepsPerDay)` to `r format(imputedMedianStepsPerDay)`. The mean total number of steps taken per day remained the same. Usually the imputing of missing values can introduce bias in an estimates but in our case impact of it on the estimates of the total daily number of steps is negligible.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-Create a new factor variable `weekpart` in the dataset with two levels “weekday” and “weekend”.
+Create a new factor variable `weekpart` in the dataset with two levels 'weekday' and 'weekend'.
 ```{r}
 weekParts <- c("Weekday", "Weekend")
 date2weekpart <- function(date) {
@@ -137,7 +137,7 @@ imputedActivity$weekpart <- sapply(imputedActivity$date, date2weekpart)
 ```
 
 Make a panel plot containing a time series plot of the 5-minute interval and the average number of steps taken, averaged across all weekday days or weekend days.
-```{r fig.width = 10}
+```{r plot-weekdays-weekends}
 avgSteps <- ddply(imputedActivity,
                   .(interval, weekpart),
                   summarise,
@@ -145,6 +145,6 @@ avgSteps <- ddply(imputedActivity,
 
 p <- ggplot(avgSteps, aes(x = interval, y = mean))
 p <- p + geom_line() + facet_grid(. ~ weekpart, )
-p <- p + ggtitle("Activity patterns on weekends and weekdays")
-p + xlab("Interval") + ylab("Number of steps")
+p <- p + ggtitle("Activity patterns on Weekdays and Weekends")
+p + xlab("Interval") + ylab("Number of Steps")
 ```

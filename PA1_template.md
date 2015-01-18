@@ -4,7 +4,7 @@
 Setup `knitr` options.
 
 ```r
-opts_chunk$set(message = FALSE, fig.width = 6, fig.height = 6)
+opts_chunk$set(message = FALSE, fig.height = 7, fig.width = 7)
 ```
 
 Load needed libraries.
@@ -35,12 +35,12 @@ Plot a histogram of the total number of steps taken per day.
 
 ```r
 p <- ggplot(stepsPerDay, aes(steps))
-p <- p + geom_histogram(fill = "white", color = "black")
-p <- p + ggtitle("Total number of steps per day")
+p <- p + geom_histogram(fill = "white", color = "red")
+p <- p + ggtitle("Total number of Steps per day")
 p + xlab("Steps per day")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![plot of chunk histogram-total-steps](figure/histogram-total-steps-1.png) 
 
 Compute the `mean` and `median` total number of steps taken per day.
 
@@ -68,10 +68,10 @@ Make a time series plot of the 5-minute interval and the average number of steps
 ```r
 p <- ggplot(avgStepsPerInterval, aes(interval, mean)) + geom_line()
 p <- p + ggtitle("The average daily activity pattern")
-p + xlab("Interval") + ylab("Number of steps")
+p + xlab("Interval") + ylab("Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png) 
+![plot of chunk plot-average-steps](figure/plot-average-steps-1.png) 
 
 Find the 5-minute interval that contains the maximum number of steps on average across all the days in the dataset.
 
@@ -120,12 +120,12 @@ Make a histogram of the total number of steps taken each day.
 
 ```r
 p <- ggplot(imputedStepsPerDay, aes(steps))
-p <- p + geom_histogram(fill = "white", color = "black")
-p <- p + ggtitle("Total number of steps per day")
+p <- p + geom_histogram(fill = "white", color = "red")
+p <- p + ggtitle("Total number of Steps per day")
 p + xlab("Steps per day")
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
+![plot of chunk histogram-imputed-total-steps](figure/histogram-imputed-total-steps-1.png) 
 
 Calculate `mean` and `median` total number of steps taken per day.
 
@@ -143,7 +143,7 @@ The imputation slightly impacted on the median total number of steps taken per d
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-Create a new factor variable `weekpart` in the dataset with two levels “weekday” and “weekend”.
+Create a new factor variable `weekpart` in the dataset with two levels 'weekday' and 'weekend'.
 
 ```r
 weekParts <- c("Weekday", "Weekend")
@@ -168,8 +168,8 @@ avgSteps <- ddply(imputedActivity,
 
 p <- ggplot(avgSteps, aes(x = interval, y = mean))
 p <- p + geom_line() + facet_grid(. ~ weekpart, )
-p <- p + ggtitle("Activity patterns on weekends and weekdays")
-p + xlab("Interval") + ylab("Number of steps")
+p <- p + ggtitle("Activity patterns on Weekdays and Weekends")
+p + xlab("Interval") + ylab("Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png) 
+![plot of chunk plot-weekdays-weekends](figure/plot-weekdays-weekends-1.png) 
